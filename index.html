@@ -1,56 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>For Skye ❤️</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff0f5;
-      text-align: center;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Skye ❤️</title>
 
-    .page {
-      display: none;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    .active {
-      display: block;
-    }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  background: #fff0f5;
+  text-align: center;
+  padding: 20px;
+}
 
-    img {
-      width: 90%;
-      max-width: 300px;
-      border-radius: 15px;
-      margin: 15px 0;
-    }
+.page {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-    input {
-      padding: 10px;
-      width: 80%;
-      margin: 10px 0;
-    }
+.active {
+  display: flex;
+}
 
-    button {
-      padding: 10px 20px;
-      background: #ff4d6d;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+h2 {
+  margin-bottom: 10px;
+}
 
-    button:hover {
-      background: #e60039;
-    }
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 350px;
+}
 
-    .summary {
-      text-align: left;
-      margin-top: 20px;
-      white-space: pre-line;
-    }
-  </style>
+img {
+  width: 100%;
+  max-width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 15px 0;
+  background: #eee;
+}
+
+input {
+  width: 100%;
+  max-width: 320px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin: 10px 0 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.summary {
+  text-align: left;
+  max-width: 350px;
+  margin: auto;
+  white-space: pre-line;
+  font-size: 15px;
+  line-height: 1.6;
+}
+</style>
 </head>
 
 <body>
@@ -61,7 +93,6 @@
   <img src="photo1.jpg">
   <p>Skye, what is your favourite memory of us?</p>
   <input type="text" id="memory">
-  <br>
   <button onclick="nextPage(2)">Next</button>
 </div>
 
@@ -71,7 +102,6 @@
   <img src="photo2.jpg">
   <p>Skye, where do you dream of travelling with me?</p>
   <input type="text" id="destination">
-  <br>
   <button onclick="nextPage(3)">Next</button>
 </div>
 
@@ -81,7 +111,6 @@
   <img src="photo3.jpg">
   <p>Skye, how would you describe our relationship?</p>
   <input type="text" id="relationship">
-  <br>
   <button onclick="nextPage(4)">Next</button>
 </div>
 
@@ -91,7 +120,6 @@
   <img src="photo4.jpg">
   <p>Skye, where do you see us in 5 years?</p>
   <input type="text" id="future">
-  <br>
   <button onclick="nextPage(5)">Next</button>
 </div>
 
@@ -101,7 +129,6 @@
   <img src="photo5.jpg">
   <p>Skye, where should our next date be?</p>
   <input type="text" id="date">
-  <br>
   <button onclick="nextPage(6)">Next</button>
 </div>
 
@@ -111,39 +138,41 @@
   <img src="photo6.jpg">
   <p>Skye, when do you feel most loved by me?</p>
   <input type="text" id="love">
-  <br>
   <button onclick="showSummary()">Continue</button>
 </div>
 
 <!-- SUMMARY PAGE -->
 <div class="page" id="summaryPage">
   <h2>💫 These Are Your Words, But They Feel Like Our Hearts Talking 💫</h2>
-
   <div class="summary" id="summaryText"></div>
-
-  <br><br>
+  <br>
   <button onclick="nextPage('finalPage')">Continue ❤️</button>
 </div>
 
 <!-- FINAL PAGE -->
 <div class="page" id="finalPage">
-  <p style="font-size:18px; max-width:500px; margin:auto;">
-  The UK is lucky to have you, even if it means I have to share you with an entire ocean.  
-  But here’s the thing about love—it doesn’t know distance, it doesn’t know time zones, it just knows hearts.  
-  And my heart knows yours.
+  <p style="max-width:350px;">
+  The UK is lucky to have you, even if it means I have to share you with an entire ocean.
+  But here’s the thing about love—it doesn’t know distance, it doesn’t know time zones,
+  it just knows hearts. And my heart knows yours.
   </p>
 
   <h2>Skye… will you be my Valentine? ❤️</h2>
 
   <button onclick="alert('I love you ❤️')">Yes, absolutely yes 💍</button>
+  <br><br>
   <button onclick="alert('Still yes 😌')">Yes</button>
 </div>
 
 <script>
-function nextPage(pageNumber) {
+function nextPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page' + pageNumber)?.classList.add('active');
-  document.getElementById(pageNumber)?.classList.add('active');
+
+  if (typeof page === "number") {
+    document.getElementById("page" + page).classList.add("active");
+  } else {
+    document.getElementById(page).classList.add("active");
+  }
 }
 
 function showSummary() {
