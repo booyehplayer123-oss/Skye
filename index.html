@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,11 +32,6 @@ img {
     margin-bottom: 15px;
 }
 
-h1 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
 textarea {
     width: 100%;
     height: 80px;
@@ -58,14 +53,6 @@ button {
     cursor: pointer;
     width: 100%;
 }
-
-button:hover {
-    background: #ff2f55;
-}
-
-.choice-btn {
-    margin-top: 10px;
-}
 </style>
 </head>
 
@@ -79,36 +66,12 @@ let step = 0;
 let answers = {};
 
 const questions = [
-{
-    q: "What’s your favorite memory of us?",
-    key: "memory",
-    img: "./photo1.jpg"
-},
-{
-    q: "If we could go anywhere together, where would it be?",
-    key: "place",
-    img: "./photo2.jpg"
-},
-{
-    q: "Describe our relationship in one sentence",
-    key: "relationship",
-    img: "./photo3.jpg"
-},
-{
-    q: "What do you see in our future?",
-    key: "future",
-    img: "./photo4.jpg"
-},
-{
-    q: "Where should our next date be?",
-    key: "date",
-    img: "./photo5.jpg"
-},
-{
-    q: "How has being with me changed you?",
-    key: "change",
-    img: "./photo6.jpg"
-}
+{ q: "What’s your favorite memory of us?", key: "memory", img: "photo1.jpg" },
+{ q: "If we could go anywhere together, where would it be?", key: "place", img: "photo2.jpg" },
+{ q: "Describe our relationship in one sentence", key: "relationship", img: "photo3.jpg" },
+{ q: "What do you see in our future?", key: "future", img: "photo4.jpg" },
+{ q: "Where should our next date be?", key: "date", img: "photo5.jpg" },
+{ q: "How has being with me changed you?", key: "change", img: "photo6.jpg" }
 ];
 
 const app = document.getElementById("app");
@@ -116,65 +79,42 @@ const app = document.getElementById("app");
 function renderQuestion() {
     const q = questions[step];
     app.innerHTML = `
-        <img src="${q.img}" alt="">
-        <h1>${q.q}</h1>
+        <img src="${q.img}">
+        <h3>${q.q}</h3>
         <textarea id="answer"></textarea>
         <button onclick="next()">Continue</button>
     `;
 }
 
 function next() {
-    const val = document.getElementById("answer").value;
-    answers[questions[step].key] = val;
+    answers[questions[step].key] = document.getElementById("answer").value;
     step++;
-
     if (step < questions.length) {
         renderQuestion();
     } else {
-        renderSummary();
+        renderFinal();
     }
-}
-
-function renderSummary() {
-    app.innerHTML = `
-        <h1>💫 Your Words 💫</h1>
-
-        <p><strong>You remember:</strong> "${answers.memory}"</p>
-        <p><strong>You dream of:</strong> "${answers.place}"</p>
-        <p><strong>You describe us as:</strong> "${answers.relationship}"</p>
-        <p><strong>You see:</strong> "${answers.future}"</p>
-        <p><strong>Next date:</strong> "${answers.date}"</p>
-        <p><strong>You've changed because:</strong> "${answers.change}"</p>
-
-        <button onclick="renderFinal()">Continue ❤️</button>
-    `;
 }
 
 function renderFinal() {
     app.innerHTML = `
-        <h1>❤️ Skye ❤️</h1>
-
         <p>
-        Distance may be 3,000 miles…
-        but my heart never learned geography.
-        It only learned you.
+        The UK is lucky to have you, even if it means I have to share you with an entire ocean. 
+        But here’s the thing about love—it doesn’t know distance, it doesn’t know time zones, 
+        it just knows hearts. And my heart knows yours.
         </p>
 
-        <h1>Will you be my Valentine?</h1>
+        <h2>Will you be my Valentine?</h2>
 
-        <button class="choice-btn" onclick="finalYes()">Yes ❤️</button>
-        <button class="choice-btn" onclick="finalYes()">Absolutely Yes 💍</button>
+        <button onclick="yes()">Yes ❤️</button>
+        <button onclick="yes()">Absolutely Yes 💍</button>
     `;
 }
 
-function finalYes() {
+function yes() {
     app.innerHTML = `
-        <h1>✨ She Said Yes ✨</h1>
-        <p>
-        No matter the distance, no matter the timezone,
-        this is ours.
-        </p>
-        <h1>❤️🌍 3,000 Miles Apart, One Heart ❤️🌍</h1>
+        <h2>✨ She Said Yes ✨</h2>
+        <p>3,000 miles apart. One heart. Always.</p>
     `;
 }
 
