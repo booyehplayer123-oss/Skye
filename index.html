@@ -1,125 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Skye ❤️</title>
+  <meta charset="UTF-8">
+  <title>For Skye ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      text-align: center;
+      padding: 20px;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #ffd6e0, #d6f0ff);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .page {
+      display: none;
+    }
 
-.card {
-    background: white;
-    width: 90%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    text-align: center;
-}
+    .active {
+      display: block;
+    }
 
-img {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
+    img {
+      width: 90%;
+      max-width: 300px;
+      border-radius: 15px;
+      margin: 15px 0;
+    }
 
-textarea {
-    width: 100%;
-    height: 80px;
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    resize: none;
-}
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+    }
 
-button {
-    margin-top: 12px;
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    width: 100%;
-}
-</style>
+    button {
+      padding: 10px 20px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e60039;
+    }
+
+    .summary {
+      text-align: left;
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card" id="app"></div>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h2>Skye 💕</h2>
+  <img src="photo1.jpg">
+  <p>Skye, what is your favourite memory of us?</p>
+  <input type="text" id="memory">
+  <br>
+  <button onclick="nextPage(2)">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h2>Skye 💕</h2>
+  <img src="photo2.jpg">
+  <p>Skye, where do you dream of travelling with me?</p>
+  <input type="text" id="destination">
+  <br>
+  <button onclick="nextPage(3)">Next</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h2>Skye 💕</h2>
+  <img src="photo3.jpg">
+  <p>Skye, how would you describe our relationship?</p>
+  <input type="text" id="relationship">
+  <br>
+  <button onclick="nextPage(4)">Next</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h2>Skye 💕</h2>
+  <img src="photo4.jpg">
+  <p>Skye, where do you see us in 5 years?</p>
+  <input type="text" id="future">
+  <br>
+  <button onclick="nextPage(5)">Next</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h2>Skye 💕</h2>
+  <img src="photo5.jpg">
+  <p>Skye, where should our next date be?</p>
+  <input type="text" id="date">
+  <br>
+  <button onclick="nextPage(6)">Next</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page6">
+  <h2>Skye 💕</h2>
+  <img src="photo6.jpg">
+  <p>Skye, when do you feel most loved by me?</p>
+  <input type="text" id="love">
+  <br>
+  <button onclick="showSummary()">Continue</button>
+</div>
+
+<!-- SUMMARY PAGE -->
+<div class="page" id="summaryPage">
+  <h2>💫 These Are Your Words, But They Feel Like Our Hearts Talking 💫</h2>
+
+  <div class="summary" id="summaryText"></div>
+
+  <br><br>
+  <button onclick="nextPage('finalPage')">Continue ❤️</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page" id="finalPage">
+  <p style="font-size:18px; max-width:500px; margin:auto;">
+  The UK is lucky to have you, even if it means I have to share you with an entire ocean.  
+  But here’s the thing about love—it doesn’t know distance, it doesn’t know time zones, it just knows hearts.  
+  And my heart knows yours.
+  </p>
+
+  <h2>Skye… will you be my Valentine? ❤️</h2>
+
+  <button onclick="alert('I love you ❤️')">Yes, absolutely yes 💍</button>
+  <button onclick="alert('Still yes 😌')">Yes</button>
+</div>
 
 <script>
-
-let step = 0;
-let answers = {};
-
-const questions = [
-{ q: "What’s your favorite memory of us?", key: "memory", img: "photo1.jpg" },
-{ q: "If we could go anywhere together, where would it be?", key: "place", img: "photo2.jpg" },
-{ q: "Describe our relationship in one sentence", key: "relationship", img: "photo3.jpg" },
-{ q: "What do you see in our future?", key: "future", img: "photo4.jpg" },
-{ q: "Where should our next date be?", key: "date", img: "photo5.jpg" },
-{ q: "How has being with me changed you?", key: "change", img: "photo6.jpg" }
-];
-
-const app = document.getElementById("app");
-
-function renderQuestion() {
-    const q = questions[step];
-    app.innerHTML = `
-        <img src="${q.img}">
-        <h3>${q.q}</h3>
-        <textarea id="answer"></textarea>
-        <button onclick="next()">Continue</button>
-    `;
+function nextPage(pageNumber) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + pageNumber)?.classList.add('active');
+  document.getElementById(pageNumber)?.classList.add('active');
 }
 
-function next() {
-    answers[questions[step].key] = document.getElementById("answer").value;
-    step++;
-    if (step < questions.length) {
-        renderQuestion();
-    } else {
-        renderFinal();
-    }
+function showSummary() {
+  const memory = document.getElementById('memory').value;
+  const destination = document.getElementById('destination').value;
+  const relationship = document.getElementById('relationship').value;
+  const future = document.getElementById('future').value;
+  const date = document.getElementById('date').value;
+  const love = document.getElementById('love').value;
+
+  const summary = `
+You remember: "${memory}"
+→ I remember that too. It's when I knew.
+
+You dream of: "${destination}"
+→ I'll take you there someday, I promise.
+
+You describe us as: "${relationship}"
+→ That's exactly what we are.
+
+You see: "${future}"
+→ I see it too. So clearly.
+
+You want our next date at: "${date}"
+→ Consider it done.
+
+You feel loved when: "${love}"
+→ I'll love you that way, always.
+
+_______________
+
+In a few weeks, you'll be thousands of miles away,
+chasing dreams and living your best life in the UK.
+I'm so incredibly proud of you.
+
+But before you go, before the distance starts,
+before the timezones get confusing,
+I need to ask you something...
+`;
+
+  document.getElementById('summaryText').innerText = summary;
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('summaryPage').classList.add('active');
 }
-
-function renderFinal() {
-    app.innerHTML = `
-        <p>
-        The UK is lucky to have you, even if it means I have to share you with an entire ocean. 
-        But here’s the thing about love—it doesn’t know distance, it doesn’t know time zones, 
-        it just knows hearts. And my heart knows yours.
-        </p>
-
-        <h2>Will you be my Valentine?</h2>
-
-        <button onclick="yes()">Yes ❤️</button>
-        <button onclick="yes()">Absolutely Yes 💍</button>
-    `;
-}
-
-function yes() {
-    app.innerHTML = `
-        <h2>✨ She Said Yes ✨</h2>
-        <p>3,000 miles apart. One heart. Always.</p>
-    `;
-}
-
-renderQuestion();
-
 </script>
 
 </body>
