@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Skye ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #ffd6e0, #d6f0ff);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    resize: none;
+}
+
+button {
+    margin-top: 12px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background: #ff2f55;
+}
+
+.choice-btn {
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+
+<script>
+
+let step = 0;
+let answers = {};
+
+const questions = [
+{
+    q: "What’s your favorite memory of us?",
+    key: "memory",
+    img: "./photo1.jpg"
+},
+{
+    q: "If we could go anywhere together, where would it be?",
+    key: "place",
+    img: "./photo2.jpg"
+},
+{
+    q: "Describe our relationship in one sentence",
+    key: "relationship",
+    img: "./photo3.jpg"
+},
+{
+    q: "What do you see in our future?",
+    key: "future",
+    img: "./photo4.jpg"
+},
+{
+    q: "Where should our next date be?",
+    key: "date",
+    img: "./photo5.jpg"
+},
+{
+    q: "How has being with me changed you?",
+    key: "change",
+    img: "./photo6.jpg"
+}
+];
+
+const app = document.getElementById("app");
+
+function renderQuestion() {
+    const q = questions[step];
+    app.innerHTML = `
+        <img src="${q.img}" alt="">
+        <h1>${q.q}</h1>
+        <textarea id="answer"></textarea>
+        <button onclick="next()">Continue</button>
+    `;
+}
+
+function next() {
+    const val = document.getElementById("answer").value;
+    answers[questions[step].key] = val;
+    step++;
+
+    if (step < questions.length) {
+        renderQuestion();
+    } else {
+        renderSummary();
+    }
+}
+
+function renderSummary() {
+    app.innerHTML = `
+        <h1>💫 Your Words 💫</h1>
+
+        <p><strong>You remember:</strong> "${answers.memory}"</p>
+        <p><strong>You dream of:</strong> "${answers.place}"</p>
+        <p><strong>You describe us as:</strong> "${answers.relationship}"</p>
+        <p><strong>You see:</strong> "${answers.future}"</p>
+        <p><strong>Next date:</strong> "${answers.date}"</p>
+        <p><strong>You've changed because:</strong> "${answers.change}"</p>
+
+        <button onclick="renderFinal()">Continue ❤️</button>
+    `;
+}
+
+function renderFinal() {
+    app.innerHTML = `
+        <h1>❤️ Skye ❤️</h1>
+
+        <p>
+        Distance may be 3,000 miles…
+        but my heart never learned geography.
+        It only learned you.
+        </p>
+
+        <h1>Will you be my Valentine?</h1>
+
+        <button class="choice-btn" onclick="finalYes()">Yes ❤️</button>
+        <button class="choice-btn" onclick="finalYes()">Absolutely Yes 💍</button>
+    `;
+}
+
+function finalYes() {
+    app.innerHTML = `
+        <h1>✨ She Said Yes ✨</h1>
+        <p>
+        No matter the distance, no matter the timezone,
+        this is ours.
+        </p>
+        <h1>❤️🌍 3,000 Miles Apart, One Heart ❤️🌍</h1>
+    `;
+}
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
